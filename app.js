@@ -6,8 +6,9 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Hero: prefer any AI twilight/exterior variant if delivered, else the camera exterior.
-  const aiHero = P.find(p => p.ai && /Exterior|Twilight|Front/i.test(p.f));
-  const heroList = [aiHero ? aiHero.f : '01_Exterior_Front', '05_Living_Area_A', '10_Kitchen_Wide'].filter(f => by[f]);
+  const tw = P.find(p => /Twilight_Front/.test(p.f));
+  const heroList = ['01_Exterior_Front', tw && tw.f, '05_Living_Area_A', '10_Kitchen_Wide'].filter(f => f && by[f]);
+  const heroCap = $('#heroCap');
   const slides = $('#heroSlides'), thumbs = $('#heroThumbs');
   heroList.forEach((f, i) => {
     const im = new Image(); im.src = src(f); im.alt = by[f].label; im.decoding = 'async';
@@ -25,6 +26,7 @@
     cur = i;
     [...slides.children].forEach((e, k) => e.classList.toggle('is-on', k === i));
     [...thumbs.children].forEach((e, k) => e.classList.toggle('is-on', k === i));
+    const t = by[heroList[i]].tag; heroCap.textContent = t; heroCap.hidden = !t;
   }
   function restart() { clearInterval(timer); if (!reduce) timer = setInterval(() => show((cur + 1) % heroList.length), 6000); }
   restart();
@@ -35,6 +37,8 @@
     const img = el.tagName === 'IMG' ? el : el.querySelector('img');
     if (img) img.src = src(f, el.classList.contains('frame') || el.closest('.cta') ? 'l' : 'm');
   });
+
+  if (tw) { const ci = document.querySelector('.cta-box img'); ci.src = src(tw.f); $('#ctaCap').hidden = false; }
 
   // Rooms marquee: one card per room, duplicated once for a seamless loop
   const roomPicks = ['04_Entry_Stairs', '08_Dining_Open_Concept', '11_Kitchen_U', '18_Bedroom_C_Ensuite_View', '19_Bathroom_C_Vanity', '21_Bedroom_A', '23_Bathroom_B', '25_Bedroom_B_Closet', '16_Upper_Hallway', '29_Patio_to_House', '26_Garage', '03_Front_Porch'].filter(f => by[f]);
@@ -58,11 +62,10 @@
   P.forEach((p, i) => {
     const c = document.createElement('button'); c.className = 'card' + (i >= 9 ? ' more' : '');
     const n = String(i + 1).padStart(2, '0');
-    c.innerHTML = `<div class="ci"><img src="${src(p.f, 'm')}" alt="${p.label}" loading="lazy">${p.ai ? '<span class="badge">Virtually enhanced</span>' : ''}</div><p class="lab">${n}${p.ai ? ' · Virtually enhanced' : ''}</p><p class="tit">${p.label}</p>`;
+    c.innerHTML = `<div class="ci"><img src="${src(p.f, 'm')}" alt="${p.label}" loading="lazy">${p.tag ? `<span class="badge">${p.tag}</span>` : ''}</div><p class="lab">${n}${p.tag ? ' · ' + p.tag : ''}</p><p class="tit">${p.label}</p>`;
     c.onclick = () => openLB(i);
     cards.appendChild(c);
   });
-  if (P.some(p => p.ai)) $('#aiNote').hidden = false;
   const va = $('#viewAll');
   va.onclick = () => {
     const all = cards.classList.toggle('all');
@@ -77,7 +80,7 @@
   // Lightbox
   const lb = $('#lb'), lbImg = $('#lbImg'), lbCap = $('#lbCap'); let li = 0;
   function openLB(i) { if (i < 0) return; li = i; render(); lb.hidden = false; document.body.style.overflow = 'hidden'; }
-  function render() { const p = P[li]; lbImg.src = src(p.f); lbImg.alt = p.label; lbCap.textContent = `${String(li + 1).padStart(2, '0')} / ${P.length}  ${p.label}${p.ai ? '  (Virtually enhanced)' : ''}`; }
+  function render() { const p = P[li]; lbImg.src = src(p.f); lbImg.alt = p.label; lbCap.textContent = `${String(li + 1).padStart(2, '0')} / ${P.length}  ${p.label}${p.tag ? '  (' + p.tag + ')' : ''}`; }
   const close = () => { lb.hidden = true; document.body.style.overflow = ''; };
   $('#lbX').onclick = close;
   $('#lbP').onclick = () => { li = (li - 1 + P.length) % P.length; render(); };

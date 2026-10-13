@@ -12,11 +12,12 @@ exiftool -q -q -overwrite_original -all= -tagsfromfile @ -icc_profile img/l/*.jp
 python3 - <<'PY'
 import os,json,re
 fs=sorted(f[:-4] for f in os.listdir('img/l') if f.endswith('.jpg'))
+SKY={'01','02','30','31'}  # enhanced sky per PHOTOS_V2_READY
 out=[]
 for f in fs:
-    ai=bool(re.search(r'(^|_)(AI|VIRTUAL|Virtual)(_|$)',f)) or 'Twilight' in f or 'AI_' in f
-    lab=re.sub(r'^\d+_','',f).replace('AI_','').replace('_',' ')
-    out.append(dict(f=f,label=lab,ai=ai))
+    tw='Twilight' in f
+    lab=re.sub(r'^\d+_','',f).replace('Virtual_','').replace('_',' ')
+    out.append(dict(f=f,label=lab,ai=tw,tag='Virtual twilight' if tw else '',sky=f[:2] in SKY))
 open('img/photos.js','w').write('window.PHOTOS='+json.dumps(out,indent=0)+';\n')
-print(len(out),'photos;',sum(o['ai'] for o in out),'AI-labeled')
+print(len(out),'photos;',sum(o['ai'] for o in out),'twilight')
 PY

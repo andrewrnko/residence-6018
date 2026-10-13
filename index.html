@@ -10,7 +10,7 @@
 <meta property="og:image" content="img/l/01_Exterior_Front.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='22' font-family='Arial' font-style='italic' font-weight='700' font-size='14' fill='%23fff' text-anchor='middle'%3E6018%3C/text%3E%3C/svg%3E">
 <link rel="preload" href="fonts/sw2.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
@@ -43,6 +43,7 @@
       <h1>The house at 6018, finished and ready</h1>
       <a class="btn btn-solid" href="#contact"><span class="roll" data-t="Schedule a tour">Schedule a tour</span></a>
     </div>
+    <p class="cap" id="heroCap" hidden></p>
     <a class="mouse" href="#residence" aria-label="Scroll down"><span></span></a>
     <div class="thumbs" id="heroThumbs" aria-label="Choose hero image"></div>
   </section>
@@ -157,7 +158,7 @@
   <section class="gallery" id="gallery">
     <div class="g-head"><h2>THE GALLERY</h2><button class="btn btn-ghost" id="viewAll"><span class="roll" data-t="View all">View all</span></button></div>
     <div class="cards" id="cards"></div>
-    <p class="fine" id="aiNote" hidden>Images marked Virtually enhanced were edited with AI for sky or lighting. Unmarked images are camera photographs corrected for exposure, color and lens geometry only.</p>
+    <p class="fine">Some images digitally enhanced. Images marked Virtual twilight show AI-assisted evening lighting; the house was photographed in daylight.</p>
   </section>
 
   <!-- CTA -->
@@ -165,6 +166,7 @@
     <div class="cta-box">
       <img data-photo="08_Dining_Open_Concept" alt="" loading="lazy">
       <div class="cta-shade"></div>
+      <p class="cap" id="ctaCap" hidden>Virtual twilight</p>
       <div class="cta-copy">
         <p class="eyebrow">Private showings</p>
         <h2>SEE IT IN PERSON. SET A TIME WITH ANATOLIY.</h2>
@@ -195,7 +197,7 @@
   <div class="foot-bottom">
     <p><span class="dim">Photography</span> Magnetic</p>
     <p><span class="dim">Anatoliy Rubashka, REALTOR, WA license</span> 127179</p>
-    <p class="dim">Information deemed reliable, not guaranteed.</p>
+    <p class="dim">Some images digitally enhanced. Information deemed reliable, not guaranteed.</p>
   </div>
 </footer>
 
@@ -206,7 +208,7 @@
   <button class="lb-n" id="lbN" aria-label="Next photo">NEXT</button>
 </div>
 
-<script src="img/photos.js?v=1"></script>
-<script src="app.js?v=3"></script>
+<script src="img/photos.js?v=2"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>
