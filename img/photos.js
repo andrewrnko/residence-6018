@@ -4,14 +4,14 @@ window.PHOTOS=[
 "label": "Exterior Front",
 "ai": false,
 "tag": "",
-"sky": true
+"sky": false
 },
 {
 "f": "02_Exterior_Entry",
 "label": "Exterior Entry",
 "ai": false,
 "tag": "",
-"sky": true
+"sky": false
 },
 {
 "f": "03_Front_Porch",
@@ -207,25 +207,18 @@ window.PHOTOS=[
 "label": "Backyard",
 "ai": false,
 "tag": "",
-"sky": true
+"sky": false
 },
 {
 "f": "31_Backyard_Wide",
 "label": "Backyard Wide",
 "ai": false,
 "tag": "",
-"sky": true
+"sky": false
 },
 {
 "f": "32_Virtual_Twilight_Front",
 "label": "Front, at twilight",
-"ai": true,
-"tag": "Virtual twilight",
-"sky": false
-},
-{
-"f": "33_Virtual_Twilight_Entry",
-"label": "Entry, at twilight",
 "ai": true,
 "tag": "Virtual twilight",
 "sky": false

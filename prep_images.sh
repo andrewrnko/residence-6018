@@ -15,7 +15,7 @@ exiftool -q -q -overwrite_original -all= -tagsfromfile @ -icc_profile img/l/*.jp
 python3 - <<'PY'
 import os,json,re
 fs=sorted(f[:-4] for f in os.listdir('img/l') if f.endswith('.jpg'))
-SKY={'01','02','30','31'}  # enhanced sky per PHOTOS_V2_READY
+SKY=set()  # v1 set: no sky enhancement
 out=[]
 for f in fs:
     tw='Twilight' in f
