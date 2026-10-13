@@ -233,55 +233,8 @@ h2{font-size:30px;line-height:33px;letter-spacing:-.3px;font-weight:500}
   .lb figure{max-width:100vw}
   .lb-p,.lb-n{top:auto;bottom:20px}
 }
-/* <=768px: every photo full-frame at its native ratio, never cropped; copy sits below the image */
-@media (max-width:768px){
-  .hero{position:relative;height:auto;min-height:0;display:block;padding:63px 0 0;background:#000}
-  .hero::before,.hero-shade{display:none}
-  .hero-slides{position:relative;inset:auto;height:auto;aspect-ratio:auto}
-  .hero-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-  .hero-slides img:first-child{position:relative;height:auto}
-  .hero-copy{padding:24px var(--pad) 8px}
-  .hero .cap{position:absolute;right:10px;left:auto;bottom:auto;top:calc(63px + (100vw * 1599 / 2400) - 24px);text-shadow:0 1px 6px rgba(0,0,0,.6)}
-  .featured{gap:44px;padding-top:40px}
-  .frame{height:auto;min-height:0;display:block;text-align:left}
-  .frame::after{display:none}
-  .frame img,.frame.in img{position:static;width:100%;height:auto;object-fit:contain;transform:none}
-  .frame-copy{max-width:none;padding:20px var(--pad) 0;text-shadow:none;align-items:flex-start}
-  .frame-copy .btns{justify-content:flex-start}
-  .about-img img{aspect-ratio:auto;height:auto;object-fit:contain}
-  .about-vid img{aspect-ratio:auto;height:auto;object-fit:contain}
-  .room{width:300px;height:auto}
-  .room img{height:auto;object-fit:contain}
-  .room::after{display:none}
-  .room p{position:static;text-align:left;margin-top:10px;font-size:16px}
-  .slide-img{aspect-ratio:auto;height:auto}
-  .slide-img img{height:auto;object-fit:contain}
-  .card .ci{aspect-ratio:auto}
-  .card img{height:auto;object-fit:contain}
-  .cta{padding:40px 0 50px}
-  .cta-box{height:auto;display:block;text-align:left}
-  .cta-shade{display:none}
-  .cta-box img{position:static;width:100%;height:auto;object-fit:contain}
-  .cta-box .cap{position:absolute;left:auto;right:10px;bottom:auto;top:calc(100vw * 1599 / 2400 - 24px);text-shadow:0 1px 6px rgba(0,0,0,.6)}
-  .cta-copy{max-width:none;align-items:flex-start;padding:24px var(--pad) 0;text-shadow:none}
-  .cta-copy .btns{justify-content:flex-start}
-  .lb figure{max-width:100vw;width:100vw}
-  .lb img{width:100vw;height:auto;max-height:calc(100vh - 160px);object-fit:contain}
-  .lb figcaption{padding:0 var(--pad)}
-}
-
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .rv{opacity:1;transform:none}
 }
 @media (prefers-reduced-transparency:reduce){.menu{background:#000;backdrop-filter:none}}
-
-/* touch: rooms strip is a real swipeable carousel (native momentum + snap), no auto-scroll, no duplicate loop */
-@media (max-width:810px),(hover:none){
-  .marquee{overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;-webkit-mask-image:none;mask-image:none;scrollbar-width:none;margin:0 calc(-1 * var(--pad));padding:0 var(--pad);scroll-padding:0 var(--pad)}
-  .marquee::-webkit-scrollbar{display:none}
-  .track{animation:none;transform:none}
-  .track .room[aria-hidden=true]{display:none}
-  .room{scroll-snap-align:start}
-  .lb img{transition:opacity .15s ease}
-}
