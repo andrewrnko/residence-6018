@@ -7,7 +7,7 @@
 
   // Hero: prefer any AI twilight/exterior variant if delivered, else the camera exterior.
   const tw = P.find(p => /Twilight_Front/.test(p.f));
-  const heroList = ['01_Exterior_Front', tw && tw.f, '05_Living_Area_A', '10_Kitchen_Wide'].filter(f => f && by[f]);
+  const heroList = ['01_Exterior_Front', tw && tw.f].filter(f => f && by[f]);
   const heroCap = $('#heroCap');
   const slides = $('#heroSlides'), thumbs = $('#heroThumbs');
   heroList.forEach((f, i) => {
@@ -62,7 +62,7 @@
   P.forEach((p, i) => {
     const c = document.createElement('button'); c.className = 'card' + (i >= 9 ? ' more' : '');
     const n = String(i + 1).padStart(2, '0');
-    c.innerHTML = `<div class="ci"><img src="${src(p.f, 'm')}" alt="${p.label}" loading="lazy">${p.tag ? `<span class="badge">${p.tag}</span>` : ''}</div><p class="lab">${n}${p.tag ? ' · ' + p.tag : ''}</p><p class="tit">${p.label}</p>`;
+    c.innerHTML = `<div class="ci"><img src="${src(p.f, 'm')}" alt="${p.label}" loading="lazy">${p.tag ? `<span class="badge">${p.tag}</span>` : ''}</div><p class="lab">${n}</p><p class="tit">${p.label}</p>`;
     c.onclick = () => openLB(i);
     cards.appendChild(c);
   });
@@ -86,6 +86,12 @@
   $('#lbP').onclick = () => { li = (li - 1 + P.length) % P.length; render(); };
   $('#lbN').onclick = () => { li = (li + 1) % P.length; render(); };
   lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  let tx = null;
+  lb.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    if (tx === null) return; const dx = e.changedTouches[0].clientX - tx; tx = null;
+    if (Math.abs(dx) > 40) (dx < 0 ? $('#lbN') : $('#lbP')).click();
+  });
   addEventListener('keydown', e => {
     if (lb.hidden) return;
     if (e.key === 'Escape') close();

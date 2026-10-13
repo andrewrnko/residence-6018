@@ -218,16 +218,23 @@ window.PHOTOS=[
 },
 {
 "f": "32_Virtual_Twilight_Front",
-"label": "Twilight Front",
+"label": "Front, at twilight",
 "ai": true,
 "tag": "Virtual twilight",
 "sky": false
 },
 {
 "f": "33_Virtual_Twilight_Entry",
-"label": "Twilight Entry",
+"label": "Entry, at twilight",
 "ai": true,
 "tag": "Virtual twilight",
+"sky": false
+},
+{
+"f": "34_Backyard_Office",
+"label": "Backyard Office",
+"ai": false,
+"tag": "",
 "sky": false
 }
 ];
