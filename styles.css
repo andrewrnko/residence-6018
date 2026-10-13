@@ -73,7 +73,7 @@ h2{font-size:30px;line-height:33px;letter-spacing:-.3px;font-weight:500}
 
 /* agent */
 .about{position:relative;z-index:1;background:#000;padding:var(--sec) var(--pad);display:flex;flex-direction:column;gap:100px}
-.about-upper,.about-lower{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.about-upper,.about-lower{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .about-left,.about-right{display:flex;align-items:center;padding:0 48px}
 .tc{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
 .tc .btn{margin-top:10px}
@@ -81,7 +81,12 @@ h2{font-size:30px;line-height:33px;letter-spacing:-.3px;font-weight:500}
 .about-img img{width:100%;aspect-ratio:546/637;object-fit:cover;object-position:50% 15%}
 .about-vid{padding:0 48px}
 .about-vid img{width:100%;aspect-ratio:546/337;object-fit:cover}
-.facts{display:grid;grid-template-columns:repeat(4,auto);gap:24px;margin-top:20px;width:100%;border-top:1px solid #262626;padding-top:20px}
+.facts{display:grid;grid-template-columns:repeat(4,auto);gap:20px 24px;margin-top:20px;width:100%;border-top:1px solid #262626;padding-top:20px}
+.schools{width:100%;margin-top:24px}
+.schools .sh{font-size:14px;line-height:15.4px;color:var(--dim);font-weight:400;margin-bottom:10px}
+.schools ul{list-style:none;border-top:1px solid #262626}
+.schools li{display:grid;grid-template-columns:1fr 70px 60px;padding:10px 0;border-bottom:1px solid #262626;font-size:16px;line-height:20px;letter-spacing:-.32px}
+.schools li span:last-child{text-align:right}
 .facts dt{font-size:14px;line-height:15.4px;color:var(--dim);font-weight:400}
 .facts dd{font-size:20px;line-height:24px;letter-spacing:-.2px;margin-top:6px}
 
