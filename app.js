@@ -56,10 +56,6 @@
   const sl = [...document.querySelectorAll('#notes .slide')]; let si = 0;
   const go = d => { sl[si].classList.remove('is-on'); si = (si + d + sl.length) % sl.length; sl[si].classList.add('is-on'); };
   $('#prev').onclick = () => go(-1); $('#next').onclick = () => go(1);
-  { const sc = $('#notes'); let sx = null, sy = null;
-    sc.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
-    sc.addEventListener('touchend', e => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; sx = null;
-      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1); }, { passive: true }); }
 
   // Gallery: every delivered photo, first 9 shown, View all expands
   const cards = $('#cards');
@@ -84,24 +80,17 @@
   // Lightbox
   const lb = $('#lb'), lbImg = $('#lbImg'), lbCap = $('#lbCap'); let li = 0;
   function openLB(i) { if (i < 0) return; li = i; render(); lb.hidden = false; document.body.style.overflow = 'hidden'; }
-  const lbSize = () => (innerWidth <= 810 ? 'm' : 'l');
-  const cache = {};
-  const pre = i => { const f = P[(i + P.length) % P.length].f, u = src(f, lbSize()); if (!cache[u]) { const im = new Image(); im.decoding = 'async'; im.src = u; cache[u] = im; } };
-  function render() { const p = P[li]; const u = src(p.f, lbSize());
-    lbImg.style.opacity = '0.35'; lbImg.onload = () => { lbImg.style.opacity = '1'; };
-    lbImg.src = u; if (lbImg.complete) lbImg.style.opacity = '1';
-    [1, -1, 2, -2].forEach(d => pre(li + d)); lbImg.alt = p.label; lbCap.textContent = `${String(li + 1).padStart(2, '0')} / ${P.length}  ${p.label}${p.tag ? '  (' + p.tag + ')' : ''}`; }
+  function render() { const p = P[li]; lbImg.src = src(p.f); lbImg.alt = p.label; lbCap.textContent = `${String(li + 1).padStart(2, '0')} / ${P.length}  ${p.label}${p.tag ? '  (' + p.tag + ')' : ''}`; }
   const close = () => { lb.hidden = true; document.body.style.overflow = ''; };
   $('#lbX').onclick = close;
   $('#lbP').onclick = () => { li = (li - 1 + P.length) % P.length; render(); };
   $('#lbN').onclick = () => { li = (li + 1) % P.length; render(); };
   lb.addEventListener('click', e => { if (e.target === lb) close(); });
   let tx = null;
-  let ty = null;
-  lb.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+  lb.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
   lb.addEventListener('touchend', e => {
-    if (tx === null) return; const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; tx = null;
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { e.preventDefault(); li = (li + (dx < 0 ? 1 : -1) + P.length) % P.length; render(); }
+    if (tx === null) return; const dx = e.changedTouches[0].clientX - tx; tx = null;
+    if (Math.abs(dx) > 40) (dx < 0 ? $('#lbN') : $('#lbP')).click();
   });
   addEventListener('keydown', e => {
     if (lb.hidden) return;
