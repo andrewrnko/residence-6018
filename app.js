@@ -90,6 +90,13 @@
     if (e.key === 'ArrowLeft') $('#lbP').click();
   });
 
+  // Footer form opens a pre-filled email to the agent (static site, no server)
+  $('#notify').addEventListener('submit', e => {
+    e.preventDefault();
+    const em = e.target.email.value.trim();
+    location.href = 'mailto:anatoliy.rubashka@cbrealty.com?subject=' + encodeURIComponent('Residence 6018: details request') + '&body=' + encodeURIComponent('Please send the full address, price and disclosures for Residence 6018 to ' + em + '.');
+  });
+
   // Mobile menu
   const burger = $('#burger'), menu = $('#menu');
   burger.onclick = () => { const o = menu.hidden; menu.hidden = !o; burger.setAttribute('aria-expanded', String(o)); };
